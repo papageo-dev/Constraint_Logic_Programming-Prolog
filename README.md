@@ -8,4 +8,4 @@ The code were created using "Notepad++" and compiled with "ECLiPSe CLP 6.1".
 
 # Folders/Files Information
 
-Each code file(.ecl), contains homework(one or more exercises) from my weekly labatories.
+Each code file(.ecl), contains homework(one or more exercises) from my weekly laboratory.
