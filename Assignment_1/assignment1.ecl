@@ -1,7 +1,6 @@
 %%% Constraint Logic Programming
 %%% Prolog
-%%% %%% Coursework 1 - 2020
-%%% ECLiPSe Constraints 
+%%% Coursework 1 - 2020
 %%% List Processing & Matching Number Series
 
 
