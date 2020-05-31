@@ -78,11 +78,8 @@ solve(N,Groups,Cost):-
 	WeightStructure =..[b|Weights],
 
 	pos_constraints(Groups,ValueStructure,WeightStructure,Cost),
-	
 	Min #= MaxValue - Cost,
-	
 	bb_min(labelSets(Groups),Min,_),
-	
 	pprint(Groups,Values,Weights).
 
 
