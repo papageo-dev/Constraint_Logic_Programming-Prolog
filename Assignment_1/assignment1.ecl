@@ -1,6 +1,7 @@
 %%% Constraint Logic Programming
 %%% Prolog
-%%% Coursework 1 - 2020
+%%% %%% Coursework 1 - 2020
+%%% ECLiPSe Constraints 
 %%% List Processing & Matching Number Series
 
 
@@ -12,16 +13,15 @@
 %%% Sucess when given a list of integers (3rd argument), 
 %%% the NewList list contains all integers that do NOT belong 
 %%% to the closed space defined by the first two Low and High arguments.
-exclude_range(_, _, [], []).                          %%% When input List is empty, return an empty NewList
-exclude_range(Low, High, [A|List], [A|NewList]) :- 
-    ( A<Low ; A>High ),                               %%% Check if a list head item(A), NOT belongs to the given range(Low-Hight)
-	!,                                                %%% (use cut(!) to prevent unwanted backtracking)
-    exclude_range(Low, High, List, NewList).          %%% If it NOT belongs, add to NewList
-	
-exclude_range(Low, High, [A|List], NewList) :- 
-    ( A>=Low ; A=<High ),                             %%% Check if a list tail item(A), NOT belongs to the given range(Low-Hight)
-	!,                                                %%% (use cut(!) to prevent unwanted backtracking)
-    exclude_range(Low, High, List, NewList).          %%% If it NOT belongs, add to NewList
+exclude_range(_,_,[],[]).
+
+exclude_range(Low,High,[X|List],NewList):-
+	X >= Low, X =< High,
+	!,
+	exclude_range(Low,High,List,NewList).
+
+exclude_range(Low,High,[X|List],[X|NewList]):-
+	exclude_range(Low,High,List,NewList).       
 
 
 
