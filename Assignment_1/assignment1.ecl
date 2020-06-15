@@ -36,32 +36,24 @@ square(X,Y):- Y is X*X.
 %%% math_match/3
 %%% math_match(List, C, Solution)
 %%% Succeed when arguments satisfy a condition
-math_match([H|T], C, Solution):-
-	onePair([H,T|_], [X,Y]),
-	maplist(C, X, Y),!,
-	pair([H|T], Solution),!.
+math_match([_], _, []).
 
-%%% onePair/2
-%%% onePair(List, PairList)
-%%% Return a consecutive pair(one at a time)
-onePair([X,Y|_], [X,Y]).
-onePair([_|Tail], XY):-
-	onePair(Tail,XY).
-  
-%%% pair/2
-%%% pair(List, ListConsPairs)
-%%% Return a list of all consecutive pairs
-pair([_],[]).
-pair([X,Y|T],[[X,Y]|T1]):-
-    pair([Y|T],T1).
+math_match([X,Y|RestNums],Func,[(X,Y)|Rest]):-
+	Call =.. [Func,X,Y],
+	Call,!,
+	math_match([Y|RestNums],Func,Rest).
+	
+math_match([_|RestNums],Func,Rest):-
+	math_match(RestNums,Func,Rest).
 	
 	
 %%% math_match_alt/3
 %%% math_match_alt/3(List, C, Solution)	
 %%% Succeed when arguments satisfy a condition
 math_match_alt(List, C, Solution):-
-	maplist(C, X, Y),
-	findall((X,Y),append(_,[X,Y|_],List),Solution).
+	findall((X,Y),
+	(append(_,[X,Y|_],List),
+	F =..[C,X,Y],F),Solution).
 	
 	
 	
